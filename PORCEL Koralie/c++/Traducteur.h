@@ -13,6 +13,7 @@ class Traducteur {
       char charLettre;                    // utile dans le Traducteur.cpp pour pour transformer une lettre d'un tableau en char
       void allumerLedDelay(int duree);
       bool allumerLedMillis(int duree, bool ledState);
+      bool AttendreMillis(int duree);
       String TabTraductlettres[28][2]={   //on met dans une matrice à deux colonnes la lettre de l'alphabet (colonne 1) et sa traduction en morse (colonne 2)
          {"a","cl"},
          {"b","lccc"},
