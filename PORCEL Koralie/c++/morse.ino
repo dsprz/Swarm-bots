@@ -10,7 +10,7 @@ void setup() {
 
 void loop() {
   Serial.println("Quel mot voulez vous traduire en morse ? ");
-  while(Serial.available() >0) {}       //ca permet de mettre en pause le terminal et d'attendre d'avoir une réponse pour le mettre dans motTraduire
+  while(Serial.available() ==0) {}       //ca permet de mettre en pause le terminal et d'attendre d'avoir une réponse pour le mettre dans motTraduire
   motTraduire = Serial.readString();
   delayOuMillis="";
   Serial.println("En utilisant delay (d) ou millis (m) ?");
