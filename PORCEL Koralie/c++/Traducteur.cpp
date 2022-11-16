@@ -55,7 +55,7 @@ void Traducteur::traduitMillis(String mot){
         if (mot[lettre]==charLettre){                         // on regarde si la lettre du mot à traduire est égale au ième ocurance du tableau
           if (i==26){                                         // si c'est un espace
             Serial.println("Nouveau mot");
-            allumerLedMillis(2400,false);                     // entre chaque mot, on laisse un peu de delay. Ici, la led est étteinte(false) et le delay est de 2400ms                    
+             while (!AttendreMillis(2400));                     // entre chaque mot, on laisse un peu de delay(2400)                
             }
           else{
             Serial.print("Lettre : ");
@@ -63,15 +63,17 @@ void Traducteur::traduitMillis(String mot){
             for(int k=0;k<TabTraductlettres[i][1].length();k++){// pour tout carractère de la traduction morse (nombre de court et de long)
               if(TabTraductlettres[i][1][k]==court[0]){         // on verrifie si la traduction de la lettre en morse est court ou long
                 Serial.print("court ");
-                while (!allumerLedMillis(400, true));           // on veut allumer la led (true) et la laisser 400ms allumée (400). Tant que le temps n'est pas écoulé(ca n'a pas allumé la led), on rappele la fonction
+                while (!allumerLedMillis(400,true));           // on veut allumer la led (true) et la laisser 400ms allumée (400). Tant que le temps n'est pas écoulé(ca n'a pas allumé la led), on rappele la fonction
+                while (!allumerLedMillis(400,false));
                 }
               else{
                 Serial.print("long ");  
-                while (!allumerLedMillis(1200, true));          // on veut allumer la led (true) et la laisser 1200ms allumée (400) 
+                while (!allumerLedMillis(1200,true));          // on veut allumer la led (true) et la laisser 1200ms allumée (400) 
+                while (!allumerLedMillis(400,false));
               }
             }
             Serial.println();    
-            allumerLedMillis(1200,false);                       // entre chaque lettres on laisse un peu plus de delay
+            while (!AttendreMillis(1200));                       // entre chaque lettres on laisse un peu plus de delay
           }
           break;                                                // on sort de la boucle car on a trouvé la bonne lettre
         }
@@ -81,7 +83,7 @@ void Traducteur::traduitMillis(String mot){
         }                                     
       }
     }
-    allumerLedMillis(1200,false); //on attend car c'est la fin du mot. Or entre chaque mot il y a 2400ms et il y a forcément (sauf si le mot est vide mais ducoup on a pas besoin d'attendre) au moins 1200ms d'attente deja(led etteinte apres une lettre ou après un espace 2400ms d'attente)
+    while (!AttendreMillis(1200)); //on attend car c'est la fin du mot. Or entre chaque mot il y a 2400ms et il y a forcément (sauf si le mot est vide mais ducoup on a pas besoin d'attendre) au moins 1200ms d'attente deja(led etteinte apres une lettre ou après un espace 2400ms d'attente)
 }
 
 
@@ -90,6 +92,15 @@ bool Traducteur::allumerLedMillis(int duree, bool ledState){
   if ((currentTime-previousTime)>duree){   // si le temps actuel - l'ancien temps est supérieur à duree alors : 
     previousTime=currentTime;               
     digitalWrite(LED_BUILTIN, ledState);   // on allume ou on etteind la led
+    return true;    
+  }
+  return false;
+}
+
+bool Traducteur::AttendreMillis(int duree){
+  currentTime=millis();
+  if ((currentTime-previousTime)>duree){   // si le temps actuel - l'ancien temps est supérieur à duree alors : 
+    previousTime=currentTime;               
     return true;                  
   }
   return false;
