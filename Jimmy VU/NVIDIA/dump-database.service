@@ -1,0 +1,9 @@
+[Unit]
+Description=Create a save of the sql file
+After=network.target
+
+[Service]
+WorkingDirectory=/home/jimmy/Documents/sql_td
+User=root
+ExecStart=/home/jimmy/Documents/sql_td/dump-database.sh
+Type=oneshot
