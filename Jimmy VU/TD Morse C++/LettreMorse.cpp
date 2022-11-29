@@ -1,7 +1,10 @@
 #include "pins_arduino.h"
 #include "LettreMorse.h"
 
-const int interval = 1000;
+const int interval = 1000;            /* Intervalle modifiable durant lequel 
+                                      * LED_BUILTIN est allumé ou éteint
+                                      */
+
 unsigned long previousMillis = 0;
 
 LettreMorse::LettreMorse()
@@ -9,457 +12,595 @@ LettreMorse::LettreMorse()
 
 }
 
-LettreMorse::LettreMorse(char lettre)
+LettreMorse::LettreMorse(char letter)
 {   
-    this->lettre = lettre;
+    this->letter = letter;
 }
 
-
-bool LettreMorse::tempsEstEcoule()
-/// Permet de contrôler la durée de l'état HIGH/LOW de LED_BUILTIN ///
+bool LettreMorse::timeIsUp()
+// Permet de contrôler la durée de l'état HIGH/LOW de LED_BUILTIN 
 {
-    unsigned long currentMillis = millis();
-    if (currentMillis - previousMillis >= interval) 
+    this->currentMillis = millis();
+    if (this->currentMillis - previousMillis >= interval) 
     {
-        previousMillis = currentMillis;
+        previousMillis = this->currentMillis;
         return true;
     }
     return false;
 }
 
-const char LettreMorse::getLettre()
+// Les fonctions suivantes font clignoter LED_BUILTIN en morse
+
+void LettreMorse::dot()
 {
-    return this->lettre;
-}
-void LettreMorse::point()
-{
-    while(!tempsEstEcoule())
+    while(!timeIsUp())
     {
+        //Serial.println("dot");
         digitalWrite(LED_BUILTIN, HIGH);
     }
 }
 
-void LettreMorse::espacement()
+void LettreMorse::spacing()
 {
-    while(!tempsEstEcoule())
-    { 
+    while(!timeIsUp())
+    {   
+       // Serial.println("spacing");
         digitalWrite(LED_BUILTIN, LOW);
     }
 }
 
-void LettreMorse::tiret()
+void LettreMorse::dash()
 {
-    for(int i =0; i < 3; ++i)
+    for(int i = 0; i < 3; ++i)
     {
-        point();
+        while(!timeIsUp())
+        {
+         // Serial.println("dash");
+            digitalWrite(LED_BUILTIN, HIGH);
+        }    
     }
     
 }
 
-void LettreMorse::finDeLettre()
+const char LettreMorse::getLetter()
 {
-    int spaceBetweenWords = 3;
-    for(int i = 0; i < spaceBetweenWords; i++)
-    {
-        espacement();
-    }
+    return this->letter;
 }
 
-void LettreMorse::clignoteLED()
+void LettreMorse::blink()
+/* Fait clignoter LED_BUILTIN en morse 
+ * en fonction de la lettre ou du chiffre.
+ * Ignore les caractères non-alphanumériques
+ * sauf 'Espace'.
+ */
 {
-    if(this->lettre == 'A')
+    switch(this->letter)
     {
-        lettreA();
+        case 'A':
+            letterA();
+            break;
+        case 'B':
+            letterB();
+            break;
+        case 'C':
+            letterC();
+            break;
+        case 'D':
+            letterD();
+            break;
+        case 'E':
+            letterE();
+            break;
+        case 'F':
+            letterF();
+            break;
+        case 'G':
+            letterG();
+            break;
+        case 'H':
+            letterH();
+            break;
+        case 'I':
+            letterI();
+            break;
+        case 'J':
+            letterJ();
+            break;
+        case 'K':
+            letterK();
+            break;
+        case 'L':
+            letterL();
+            break;
+        case 'M':
+            letterM();
+            break;
+        case 'N':
+            letterN();
+            break;
+        case 'O':
+            letterO();
+            break;
+        case 'P':
+            letterP();
+            break;
+        case 'Q':
+            letterQ();
+            break;
+        case 'R':
+            letterR();
+            break;
+        case 'S':
+            letterS();
+            break;
+        case 'T':
+            letterT();
+            break;
+        case 'U':
+            letterU();
+            break;
+        case 'V':
+            letterV();
+            break;
+        case 'W':
+            letterW();
+            break;
+        case 'X':
+            letterX();
+            break;
+        case 'Y':
+            letterY();
+            break;
+        case 'Z':
+            letterZ();
+            break;
+        case ' ':
+            spaceBetweenTwoWords();
+            break;
+        case '0':
+            number0();
+            break;
+        case '1':
+            number1();
+            break;
+        case '2':
+            number2();
+            break;
+        case '3':
+            number3();
+            break;
+        case '4':
+            number4();
+            break;
+        case '5':
+            number5();
+            break;
+        case '6':
+            number6();
+            break;
+        case '7':
+            number7();
+            break;
+        case '8':
+            number8();
+            break;
+        case '9':
+            number9();
+            break;
+        default:
+            return;
     }
-
-    if(this->lettre == 'B')
-    {
-        lettreB();
-    }
-
-    if(this->lettre == 'C')
-    {
-        lettreC();
-    }
-
-    if(this->lettre == 'D')
-    {
-        lettreD();
-    }
-
-    if(this->lettre == 'E')
-    {
-        lettreE();
-    }
-
-    if(this->lettre == 'F')
-    {
-        lettreF();
-
-    }
-
-    if(this->lettre == 'G')
-    {
-        lettreG();
-    }
-
-    if(this->lettre == 'H')
-    {
-        lettreH();
-
-    }
-
-    if(this->lettre == 'I')
-    {
-        lettreI();
-    }
-
-    if(this->lettre == 'J')
-    {
-        lettreJ();
-    }
-
-    if(this->lettre == 'K')
-    {
-        lettreK();
-
-    }
-
-    if(this->lettre == 'L')
-    {
-        lettreL();
-    }
-
-    if(this->lettre == 'M')
-    {
-        lettreM();
-    }
-
-    if(this->lettre == 'N')
-    {
-        lettreN();
-
-    }
-
-    if(this->lettre == 'O')
-    {
-        lettreO();
-    }
-
-    if(this->lettre == 'P')
-    {
-        lettreP();
-    }
-
-    if(this->lettre == 'Q')
-    {
-        lettreQ();
-
-    }
-
-    if(this->lettre == 'R')
-    {
-        lettreR();
-    }
-
-    if(this->lettre == 'S')
-    {
-        lettreS();
-    }
-
-    if(this->lettre == 'T')
-    {
-        lettreT();
-    }
-
-    if(this->lettre == 'U')
-    {
-        lettreU();
-    }
-
-    if(this->lettre == 'V')
-    {
-        lettreV();
-    }
-
-    if(this->lettre == 'W')
-    {
-        lettreW();
-
-    }
-
-    if(this->lettre == 'X')
-    {
-        lettreX();
-    }
-
-    if(this->lettre == 'Y')
-    {
-        lettreY();
-    }
-
-    if(this->lettre == 'Z')
-    {
-        lettreZ();
-    }      
-    
-    Serial.print(this->lettre);
-    finDeLettre();
+    endLetter();
+    Serial.print(this->letter);
 }
 
 
-void LettreMorse::lettreA()
+/* Les fonctions qui suivent traduisent
+ * une lettre (et 'Espace') ou un chiffre en morse
+ */
+
+void LettreMorse::letterA()
 {
-    point(); 
-    espacement(); 
-    tiret();
+    dot();
+    spacing(); 
+    dash();
 }
 
-void LettreMorse::lettreB()
+void LettreMorse::letterB()
 {
-    tiret();
+    dash();
     for(int i = 0; i < 3; ++i)
     {
-        espacement();
-        point();
+        spacing();
+        dot();
     }
 }
 
-void LettreMorse::lettreC()
+void LettreMorse::letterC()
 {
-    tiret();
-    espacement();
-    point();
+    dash();
+    spacing();
+    dot();
 
-    espacement();
+    spacing();
 
-    tiret();
-    espacement();
-    point();
+    dash();
+    spacing();
+    dot();
 
 }
 
-void LettreMorse::lettreD()
+void LettreMorse::letterD()
 {
-    tiret();
+    dash();
     for(int i = 0; i < 2; ++i)
     {
-        espacement();
-        point();
+        spacing();
+        dot();
     }
 }
 
-void LettreMorse::lettreE()
+void LettreMorse::letterE()
 {
-    point();
+    dot();
 }
 
-void LettreMorse::lettreF()
-{
-    for(int i = 0; i < 2; ++i)
-    {
-        point();
-        espacement();
-    }
-    tiret();
-    espacement();
-    point();
-}
-
-void LettreMorse::lettreG()
+void LettreMorse::letterF()
 {
     for(int i = 0; i < 2; ++i)
     {
-        tiret();
-        espacement();
+        dot();
+        spacing();
     }
-    point();
+    dash();
+    spacing();
+    dot();
 }
 
-void LettreMorse::lettreH()
+void LettreMorse::letterG()
+{
+    for(int i = 0; i < 2; ++i)
+    {
+        dash();
+        spacing();
+    }
+    dot();
+}
+
+void LettreMorse::letterH()
 {
     for(int i = 0; i < 3; ++i)
     {
-        point();
-        espacement();
+        dot();
+        spacing();
     }
-    point();
+    dot();
 }
 
 
-void LettreMorse::lettreI()
+void LettreMorse::letterI()
 {
-    point();
-    espacement();
-    point();
+    dot();
+    spacing();
+    dot();
 }
 
-void LettreMorse::lettreJ()
+void LettreMorse::letterJ()
 {
-    point();
-    espacement();
+    dot();
+    spacing();
     for(int i = 0; i < 2; ++i)
     {
-        tiret();
-        espacement();
+        dash();
+        spacing();
     }
-    tiret();
+    dash();
 }
 
-void LettreMorse::lettreK()
+void LettreMorse::letterK()
 {
-    tiret();
-    espacement();
-    point();
-    espacement();
-    tiret();
+    dash();
+    spacing();
+    dot();
+    spacing();
+    dash();
 }
 
-void LettreMorse::lettreL()
+void LettreMorse::letterL()
 {
-    point();
-    espacement();
-    tiret();
+    dot();
+    spacing();
+    dash();
     for(int i = 0; i < 2; ++i)
     {
-        espacement();
-        point();
+        spacing();
+        dot();
     }
 }
 
-void LettreMorse::lettreM()
+void LettreMorse::letterM()
 {
-    tiret();
-    espacement();
-    tiret();
+    dash();
+    spacing();
+    dash();
 }
 
-void LettreMorse::lettreN()
+void LettreMorse::letterN()
 {
-    tiret();
-    espacement();
-    point();
+    dash();
+    spacing();
+    dot();
 }
 
-void LettreMorse::lettreO()
-{
-    for(int i = 0; i < 2; ++i)
-    {
-        tiret();
-        espacement();
-    }
-    tiret();
-}
-
-void LettreMorse::lettreP()
-{
-    point();
-    espacement();
-    tiret();
-    espacement();
-    tiret();
-    espacement();
-    point();
-}
-
-void LettreMorse::lettreQ()
+void LettreMorse::letterO()
 {
     for(int i = 0; i < 2; ++i)
     {
-        tiret();
-        espacement();
+        dash();
+        spacing();
     }
-    point();
-    espacement();
-    tiret();
+    dash();
 }
 
-void LettreMorse::lettreR()
+void LettreMorse::letterP()
 {
-    point();
-    espacement();
-    tiret();
-    espacement();
-    point();
+    dot();
+    spacing();
+    dash();
+    spacing();
+    dash();
+    spacing();
+    dot();
 }
 
-void LettreMorse::lettreS()
+void LettreMorse::letterQ()
 {
     for(int i = 0; i < 2; ++i)
     {
-        point();
-        espacement();
+        dash();
+        spacing();
     }
-    point();
+    dot();
+    spacing();
+    dash();
 }
 
-void LettreMorse::lettreT()
+void LettreMorse::letterR()
 {
-    tiret();
+    dot();
+    spacing();
+    dash();
+    spacing();
+    dot();
 }
 
-void LettreMorse::lettreU()
+void LettreMorse::letterS()
 {
     for(int i = 0; i < 2; ++i)
     {
-        point();
-        espacement();
+        dot();
+        spacing();
     }
-    tiret();
+    dot();
 }
 
-void LettreMorse::lettreV()
+void LettreMorse::letterT()
+{
+    dash();
+}
+
+void LettreMorse::letterU()
+{
+    for(int i = 0; i < 2; ++i)
+    {
+        dot();
+        spacing();
+    }
+    dash();
+}
+
+void LettreMorse::letterV()
 {
     for(int i = 0; i < 3; ++i)
     {
-        point();
-        espacement();
+        dot();
+        spacing();
     }
-    tiret();
+    dash();
 }
 
-void LettreMorse::lettreW()
+void LettreMorse::letterW()
 {
-    point();
+    dot();
     for(int i = 0; i < 2; ++i)
     {
-        espacement();
-        tiret();
-    }
-}
-
-void LettreMorse::lettreX()
-{
-    tiret();
-    espacement();
-    for(int i = 0; i < 2; ++i)
-    {
-        point();
-        espacement();
-    }
-    tiret();
-}
-
-void LettreMorse::lettreY()
-{
-    tiret();
-    espacement();
-    point();
-    for(int i = 0; i < 2; ++i)
-    {
-        espacement();
-        tiret();
+        spacing();
+        dash();
     }
 }
 
-void LettreMorse::lettreZ()
+void LettreMorse::letterX()
+{
+    dash();
+    spacing();
+    for(int i = 0; i < 2; ++i)
+    {
+        dot();
+        spacing();
+    }
+    dash();
+}
+
+void LettreMorse::letterY()
+{
+    dash();
+    spacing();
+    dot();
+    for(int i = 0; i < 2; ++i)
+    {
+        spacing();
+        dash();
+    }
+}
+
+void LettreMorse::letterZ()
 {
     for(int i = 0; i < 2; ++i)
     {
-        tiret();
-        espacement();
+        dash();
+        spacing();
     }
-    point();
-    espacement();
-    point();
+    dot();
+    spacing();
+    dot();
+}
+
+void LettreMorse::number0()
+{
+  for(int i = 0; i < 4; ++i)
+  {
+    dash();
+    spacing();
+  }
+  dash();
+}
+
+void LettreMorse::number1()
+{
+  dot();
+  spacing();
+  for(int i = 0; i < 3; ++i)
+  {
+    dash();
+    spacing();
+  }
+  dash();
+}
+
+void LettreMorse::number2()
+{
+  for(int i = 0; i < 2; ++i)
+  {
+    dot();
+    spacing();
+  }
+  for(int i = 0; i < 2; ++i)
+  {
+    dash();
+    spacing();
+  }
+  dash();
+}
+
+void LettreMorse::number3()
+{
+  for(int i = 0; i < 3; ++i)
+  {
+    dot();
+    spacing();
+  }
+  dash();
+  spacing();
+  dash();
+}
+
+void LettreMorse::number4()
+{
+  for(int i = 0; i < 4; ++i)
+  {
+    dot();
+    spacing();
+  }
+  dash();
+}
+
+void LettreMorse::number5()
+{
+  for(int i = 0; i < 4; ++i)
+  {
+    dot();
+    spacing();
+  }
+  dot();
+}
+
+void LettreMorse::number6()
+{
+  dash();
+  spacing();
+  for(int i = 0; i < 3; ++i)
+  {
+    dot();
+    spacing();
+  }
+  dot();
+}
+
+void LettreMorse::number7()
+{
+  for(int i = 0; i < 2; ++i)
+  {
+    dash();
+    spacing();
+  }
+  for(int i = 0; i < 2; ++i)
+  {
+    dot();
+    spacing();
+  }
+  dot();
+}
+
+void LettreMorse::number8()
+{
+  for(int i = 0; i < 3; ++i)
+  {
+    dash();
+    spacing();
+  }
+  dot();
+  spacing();
+  dot();
+}
+
+void LettreMorse::number9()
+{
+  for(int i = 0; i < 4; ++i)
+  {
+    dash();
+    spacing();
+  }
+  dot();
+}
+
+void LettreMorse::endLetter()
+/* Sépare les lettres entre elles
+ * en ajoutant un espace
+ */
+{
+    const int spaceBetweenLetters = 3;
+    for(int i = 0; i < spaceBetweenLetters; i++)
+    {
+        while(!timeIsUp())
+        {
+            // Serial.println("Fin De Lettre");
+            digitalWrite(LED_BUILTIN, LOW);
+        }
+    }
+}
+
+void LettreMorse::spaceBetweenTwoWords()
+/* Sépare les mots entre eux
+ * en ajoutant un espace plus long
+ */ 
+{
+  const int spaceBetweenWords = 7;
+  for(int i = 0; i < spaceBetweenWords; ++i)
+    {
+        while(!timeIsUp())
+        {
+            // Serial.println("Espace entre deux mots");
+            digitalWrite(LED_BUILTIN, LOW);
+        }
+    }
 }

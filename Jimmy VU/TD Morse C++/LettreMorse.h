@@ -4,47 +4,57 @@
 
 class LettreMorse
 {
-
     public:
         LettreMorse();
-        LettreMorse(char lettre);
-        void clignoteLED();
-        const char getLettre();
+        LettreMorse(char letter);
+        void blink();
+        const char getLetter();
 
     private:
-        char lettre;
-        bool tempsEstEcoule();
-        void espacement();
-        void point();
-        void tiret();
-        void finDeLettre();
-        void lettreA();
-        void lettreB();
-        void lettreC();
-        void lettreD();
-        void lettreE();
-        void lettreF();
-        void lettreG();
-        void lettreH();
-        void lettreI();
-        void lettreJ();
-        void lettreK();
-        void lettreL();
-        void lettreM();
-        void lettreN();
-        void lettreO();
-        void lettreP();
-        void lettreQ();
-        void lettreR();
-        void lettreS();
-        void lettreT();
-        void lettreU();
-        void lettreV();
-        void lettreW();
-        void lettreX();
-        void lettreY();
-        void lettreZ();
-
+        unsigned long currentMillis;
+        char letter;
+        bool timeIsUp();
+        void spacing();
+        void spaceBetweenTwoWords();
+        void dot();
+        void dash();
+        void endLetter();
+        void letterA();
+        void letterB();
+        void letterC();
+        void letterD();
+        void letterE();
+        void letterF();
+        void letterG();
+        void letterH();
+        void letterI();
+        void letterJ();
+        void letterK();
+        void letterL();
+        void letterM();
+        void letterN();
+        void letterO();
+        void letterP();
+        void letterQ();
+        void letterR();
+        void letterS();
+        void letterT();
+        void letterU();
+        void letterV();
+        void letterW();
+        void letterX();
+        void letterY();
+        void letterZ();
+        void number0();
+        void number1();
+        void number2();
+        void number3();
+        void number4();
+        void number5();
+        void number6();
+        void number7();
+        void number8();
+        void number9();
 };
 
 #endif

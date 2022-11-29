@@ -1,4 +1,3 @@
-#include "HardwareSerial.h"
 #include "Traducteur.h"
 
 Traducteur::Traducteur()
@@ -6,25 +5,28 @@ Traducteur::Traducteur()
 
 }
 
-void Traducteur::traduireMot(String s)
+void Traducteur::translateWord(String s)
+// Traduit un mot en son équivalent morse 
 {
     s.toUpperCase();
-    setTableauLettreMorse(s);
+    setLettreMorseArray(s);
 
     for(int i = 0; i < s.length(); ++i)
     {
-        this->mot[i].clignoteLED();
+        this->word[i].blink();
     }
     Serial.println("");
 }
 
-void Traducteur::setTableauLettreMorse(String s)
-/// Initialise le tableau LettreMorse ///
+void Traducteur::setLettreMorseArray(String s)
+/* Initialise le tableau de LettreMorse
+ * avec toutes les lettres de la phrase
+ */ 
 {
     int i = 0;
     for(const char &c : s)
     {
-        this->mot[i] = LettreMorse(c);
+        this->word[i] = LettreMorse(c);
         i++;   
     }
 }

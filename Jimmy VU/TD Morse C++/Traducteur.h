@@ -6,12 +6,12 @@
 class Traducteur{
     public:
         Traducteur();
-        void traduireMot(String s); 
+        void translateWord(String word);
 
     private:
-        const static int longueurMax = 30;
-        LettreMorse mot[longueurMax]; //Il fallait ajouter un constructeur LettreMorse avec 0 argument
-        void setTableauLettreMorse(String s);
+        const static int maxLength = 250;
+        LettreMorse word[maxLength]; 
+        void setLettreMorseArray(String s);
 };
 
 #endif
