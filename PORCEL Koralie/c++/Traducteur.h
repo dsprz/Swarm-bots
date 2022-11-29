@@ -6,12 +6,11 @@ class Traducteur {
       void traduitMot(String mot); // Fonction qui permet de traduire
     private : 
       void lettreTrouve(int i);
-      bool allumerLed(bool ledState, int duree);
-      bool attendre(int duree);
+      bool attendre(bool ledState, int duree);
       const char court[2]="s";            //correspond à un temps short donc court
-      unsigned long currentTime=0;        //permet d'utiliser la fonction millis dans le Traducteur.cpp
-      unsigned long previousTime=0;
-      String TabTraductlettres[37][2]={   //on met dans une matrice à deux colonnes la lettre de l'alphabet (colonne 1) et sa traduction en morse (colonne 2)
+      unsigned long tempsActuel=0;        //permet d'utiliser la fonction millis dans le Traducteur.cpp
+      unsigned long tempsAncien=0;
+      String TabTraductlettres[37][2]={   //met dans une matrice à deux colonnes la lettre de l'alphabet (colonne 1) et sa traduction en morse (colonne 2)
          {"0","lllll"},
          {"1","sllll"},
          {"2","sslll"},
