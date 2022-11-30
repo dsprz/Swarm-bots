@@ -1,3 +1,7 @@
+/*Ecrit par Jimmy VU
+ *
+ */
+
 #include "pins_arduino.h"
 #include "LettreMorse.h"
 
