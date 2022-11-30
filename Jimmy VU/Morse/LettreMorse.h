@@ -1,3 +1,9 @@
+/* Ecrit par Jimmy VU
+ * Cette classe modélise une lettre
+ * ou un chiffre en son équivalent morse
+ */
+
+
 #ifndef _LETTREMORSE_
 #define _LETTREMORSE_
 #include <Arduino.h>
