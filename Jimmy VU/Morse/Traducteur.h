@@ -1,3 +1,9 @@
+/* Ecrit par Jimmy VU
+ * Cette classe traduit une phrase
+ * en morse. Les caractères non-alphanumériques
+ * sont ignorés.
+ */
+
 #ifndef _TRADUCTEUR_
 #define _TRADUCTEUR_
 #include "LettreMorse.h"
