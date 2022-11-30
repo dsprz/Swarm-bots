@@ -1,3 +1,7 @@
+/*Ecrit par Jimmy VU
+ *
+ */
+
 #include "Traducteur.h"
 
 Traducteur::Traducteur()
