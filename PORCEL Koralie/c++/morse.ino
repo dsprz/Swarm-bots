@@ -7,7 +7,7 @@ void setup() {
 }
 
 void loop() {
-  Serial.println("Quel est la phrase que vous voulez traduire en morse ? ");
+  Serial.println("Quel phrase voulez vous traduire en morse ? ");
   while(Serial.available() == 0) {}       //ca permet de mettre en pause le terminal et d'attendre d'avoir une réponse pour le mettre dans motATraduire
   String motATraduire = Serial.readString();
   Serial.print("Vous avez choisi comme phrase : ");
