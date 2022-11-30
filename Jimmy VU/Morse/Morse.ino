@@ -1,6 +1,7 @@
 /* Ecrit par Jimmy VU
+ * Normalement, le code fonctionne pour au moins Arduino 1.8.x.
  * Pour vos tests, vous pouvez modifier le temps 
- * durant lequel la LED est allumée/éteinte
+ * durant lequel LED_BUILTIN est allumée/éteinte
  * en allant dans LettreMorse.cpp et en modifiant
  * la variable const int interval qui se trouve
  * en tête du fichier. Par défaut elle vaut 1000.
