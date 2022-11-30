@@ -32,7 +32,7 @@ void Traducteur::lettreTrouve(int i){
           if(TabTraductlettres[i][1][k]==court){            // on vérifie si la traduction de la lettre en morse est court ou long
               Serial.print("court ");
               clignotementLed(400);  // lors d'une impulsion court, la led reste allumée pendant 400ms
-              }                        
+          }                        
           else{
               Serial.print("long ");
               clignotementLed(1200); // lors d'une impulsion longue, la led reste allumée pendant 1200ms
