@@ -70,7 +70,7 @@ const char LettreMorse::getLetter()
 void LettreMorse::blink()
 /* Fait clignoter LED_BUILTIN en morse 
  * en fonction de la lettre ou du chiffre.
- * Ignore les caractères non-alphanumériques
+ * Ignore les caractères non-alphanumériques (accents compris)
  * sauf 'Espace'.
  */
 {
