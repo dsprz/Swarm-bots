@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="130.10001mm"
+   height="130.10001mm"
+   viewBox="0 0 130.10001 130.10001"
+   version="1.1"
+   preserveAspectRatio="xMidYMid"
+   id="svg34"
+   sodipodi:docname="bas.svg"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs38" />
+  <sodipodi:namedview
+     id="namedview36"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.86657723"
+     inkscape:cx="-29.426114"
+     inkscape:cy="145.39962"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svgGroup" />
+  <g
+     id="svgGroup"
+     stroke-linecap="round"
+     fill-rule="evenodd"
+     font-size="12px"
+     stroke="#000"
+     stroke-width="0.25mm"
+     fill="none"
+     style="fill:none;stroke:#000000;stroke-width:0.25mm"
+     transform="translate(-306.84603,-166.51835)">
+    <path
+       d="m 309.89603,169.56835 v 38.375 h -3 v 47.25 h 3 v 38.375 h 38.375 v 3 h 47.25 v -3 h 38.375 v -38.375 h 3 v -47.25 h -3 v -38.375 h -38.375 v -3 h -47.25 v 3 z"
+       id="top_outsideCutPath"
+       stroke="#FF0000"
+       stroke-width="0.1"
+       style="fill:none;stroke:#ff0000;stroke-width:0.1"
+       vector-effect="non-scaling-stroke" />
+    <ellipse
+       style="fill:#ffffff;stroke:#ff0000;stroke-width:0.081981"
+       id="path342"
+       cx="372.34607"
+       cy="277.01834"
+       rx="10.45901"
+       ry="10.459009" />
+    <circle
+       style="fill:#ffffff;stroke:#ff0000;stroke-width:0.07789"
+       id="path715"
+       cx="372.53983"
+       cy="263.38663"
+       r="1.961055" />
+  </g>
+</svg>
