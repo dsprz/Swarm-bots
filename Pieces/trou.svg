@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="20.210001mm"
+   height="40.809998mm"
+   viewBox="0 0 20.210001 40.809998"
+   version="1.1"
+   id="svg305"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="trou.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview307"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.76880612"
+     inkscape:cx="340.13777"
+     inkscape:cy="487.76927"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs302" />
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-38.539609,-23.741235)">
+    <rect
+       style="fill:#ffffff;stroke:#ff0000;stroke-width:0.01;stroke-dasharray:none"
+       id="rect478"
+       width="20.200001"
+       height="40.799999"
+       x="38.544609"
+       y="23.746235" />
+    <rect
+       style="fill:#ffffff;stroke:#ff0000;stroke-width:0.01;stroke-dasharray:none"
+       id="rect478-2"
+       width="20.200001"
+       height="40.799999"
+       x="78.544609"
+       y="23.746235" />
+  </g>
+</svg>
