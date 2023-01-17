@@ -5,10 +5,13 @@
 const int gripperServoPin = 3;
 const int leftWheelPin = 5;
 const int rightWheelPin = 6;
-const int trigger = 9;
-const int echo = 10;
-const int maxDistance = 1000; //cm
-float stickGlueHeight = 6 ; //cm
+const int trigger = 14;
+const int echo = 15;
+const int maxDistance = 350; //cm
+//float stickGlueHeight = 6 ; //cm
+float distance;
+bool grabbing = false;
+bool grabbed = false;
 
 Pixy2 pixy;
 Servo gripperServo;
@@ -24,7 +27,7 @@ void fullSpeed()
 
 void stop()
 {
-  rightWheel.write(0);
+  rightWheel.write(90);
   leftWheel.write(270);
 }
 
@@ -40,11 +43,19 @@ void turnLeft()
   leftWheel.write(270);
 }
 
-void avoidObstacle(int distance)
+void avoidObstacle(float distance)
 //The robot turns right to avoid the obstacle
 {
-  if(distance > 1) fullSpeed();
-  else turnRight();
+  if(distance > 20) 
+  {
+    fullSpeed();
+    Serial.println("Full speed");
+  }
+  else 
+  {
+    turnRight(); 
+    Serial.println("Turn Right");
+  }
 }
 void pixyPrintBlockInfos()
 {
@@ -62,13 +73,22 @@ void grabTheObject()
   pixy.ccc.getBlocks();
   if(pixy.ccc.numBlocks)
   {
+    grabbed = true;
     stop();
     gripperServo.write(120); //grab the object
-    delay(1000);
+    //delay(1000);
   }
   else
   {
     gripperServo.write(0); //gripper base position (no object)
+  }
+}
+
+void objectIsGrabbed(float distance)
+{
+  if (grabbed)
+  {
+    avoidObstacle(distance);
   }
 }
 
@@ -80,20 +100,23 @@ void grabTheObject()
 void setup() 
 {
   Serial.begin(9600);
+  //pinMode(trigger, OUTPUT);
+  //pinMode(echo, INPUT);
   gripperServo.attach(gripperServoPin);
   rightWheel.attach(rightWheelPin);
   leftWheel.attach(leftWheelPin);
   pixy.init();
   gripperServo.write(0);
-  stop();
+  //stop();
 }
 
 void loop() 
 {
-  int distance = distanceSensor.ping_cm();
-  //avoidObstacle(distance);
-  Serial.print("Distance : ");
-  Serial.println(distanceSensor.ping_cm());
-  fullSpeed();
   grabTheObject();
+  distance = distanceSensor.ping_cm();
+  avoidObstacle(distance);
+  Serial.print("Distance : ");
+  Serial.println(distance);
+  //rightWheel.write(0);
+  //fullSpeed();
 }
