@@ -88,7 +88,7 @@ void grabTheObject()
 }
 
 void objectIsGrabbed(float distance)
-//A remplacer, doit pouvoir reconnaitre qu'un objet est effectivement attrapé
+//A mettre en place, doit pouvoir reconnaitre qu'un objet est effectivement attrapé
 {
   if (grabbed)
   {
@@ -121,8 +121,8 @@ void loop()
   distance = distanceSensor.ping_cm();
   avoidObstacle(distance);
   Serial.print("Distance : ");
-  Serial.println(distance);*/
+  Serial.println(distance);
   //rightWheel.write(0);
   //fullSpeed();
-  //rightWheel.write(0);
+  //rightWheel.write(0);*/
 }
