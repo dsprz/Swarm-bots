@@ -19,6 +19,7 @@ Servo rightWheel;
 Servo leftWheel;
 NewPing distanceSensor(trigger, echo, maxDistance);
 
+//Fonctions de déplacement du robot
 void fullSpeed()
 {
   rightWheel.write(0);
@@ -44,7 +45,7 @@ void turnLeft()
 }
 
 void avoidObstacle(float distance)
-//The robot turns right to avoid the obstacle
+//Le robot tourne à droite pour éviter un obstable
 {
   if(distance > 20) 
   {
@@ -58,6 +59,7 @@ void avoidObstacle(float distance)
   }
 }
 void pixyPrintBlockInfos()
+//Affiche les informations utiles de la Pixy pour la détection d'objets
 {
     for(int i = 0; i < pixy.ccc.numBlocks; ++i)
     {
@@ -69,6 +71,7 @@ void pixyPrintBlockInfos()
 }
 
 void grabTheObject()
+//Actionne le servomoteur pour attraper un objet
 {
   pixy.ccc.getBlocks();
   if(pixy.ccc.numBlocks)
@@ -85,6 +88,7 @@ void grabTheObject()
 }
 
 void objectIsGrabbed(float distance)
+//A remplacer, doit pouvoir reconnaitre qu'un objet est effectivement attrapé
 {
   if (grabbed)
   {
@@ -93,6 +97,7 @@ void objectIsGrabbed(float distance)
 }
 
 /*float distanceBetweenRobotAndObject()
+//Censée retourner la distance entre le robot et l'objet à attraper, en cm
 {
   distanceHeight = 3;
 }*/
@@ -112,11 +117,12 @@ void setup()
 
 void loop() 
 {
-  grabTheObject();
+  /*grabTheObject();
   distance = distanceSensor.ping_cm();
   avoidObstacle(distance);
   Serial.print("Distance : ");
-  Serial.println(distance);
+  Serial.println(distance);*/
   //rightWheel.write(0);
   //fullSpeed();
+  //rightWheel.write(0);
 }
