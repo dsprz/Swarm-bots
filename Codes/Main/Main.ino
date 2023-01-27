@@ -46,7 +46,7 @@ void turnLeft()
 }
 
 void avoidObstacle(float distance)
-//Le robot tourne à droite pour éviter un obstable
+//Le robot tourne à droite pour éviter un obstacle
 {
   if(distance > 20) 
   {
@@ -84,7 +84,7 @@ void grabTheObject()
   }
   else
   {
-    gripperServo.write(0); //gripper base position (no object)
+    gripperServo.write(0); //Position de base du gripper (angle 0)
   }
 }
 
