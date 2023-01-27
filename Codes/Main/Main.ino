@@ -9,8 +9,9 @@ const int trigger = 14;
 const int echo = 15;
 const int maxDistance = 350; //cm
 //float stickGlueHeight = 6 ; //cm
-float distance;
-bool grabbing = false;
+float distance; //cm
+
+bool grabbing = false; //Pour l'instant ces deux bools ne servent à rien
 bool grabbed = false;
 
 Pixy2 pixy;
@@ -88,7 +89,7 @@ void grabTheObject()
 }
 
 void objectIsGrabbed(float distance)
-//A mettre en place, doit pouvoir reconnaitre qu'un objet est effectivement attrapé
+//TODO, doit pouvoir reconnaitre qu'un objet est effectivement attrapé
 {
   if (grabbed)
   {
@@ -99,14 +100,11 @@ void objectIsGrabbed(float distance)
 /*float distanceBetweenRobotAndObject()
 //Censée retourner la distance entre le robot et l'objet à attraper, en cm
 {
-  distanceHeight = 3;
 }*/
 
 void setup() 
 {
   Serial.begin(9600);
-  //pinMode(trigger, OUTPUT);
-  //pinMode(echo, INPUT);
   gripperServo.attach(gripperServoPin);
   rightWheel.attach(rightWheelPin);
   leftWheel.attach(leftWheelPin);
@@ -122,7 +120,6 @@ void loop()
   avoidObstacle(distance);
   Serial.print("Distance : ");
   Serial.println(distance);
-  //rightWheel.write(0);
-  //fullSpeed();
-  //rightWheel.write(0);*/
+  fullSpeed();
+  */
 }
