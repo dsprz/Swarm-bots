@@ -1,12 +1,29 @@
 Algorithme pour la localisation des robots
-L'araignée et les swarms sont équipés de modules à ultrason.
-Au début, les modules de l'araignée sont éteints.
-Les swarms font fonctionner leurs modules tout le temps.
 
-Les swarms émettent des ultrasons et reçoivent des ultrasons de la part d'autres swarms.
+L'araignée et les petits robots sont équipés de modules à ultrason.
+Au début, les modules de l'araignée sont éteints.
+Les petit robots font fonctionner leurs modules tout le temps.
+Les petits robots émettent des ultrasons et reçoivent des ultrasons de la part d'autres robots.
+
 Si le signal reçu par un des capteurs à droite est plus fort que celui de gauche :
     Le robot émetteur est à droite du robot récepteur
 Si le signal reçu par un des capteurs à gauche est plus fort que celui de droite :
     Le robot émetteur est à gauche du robot récepteur
+
+Lorsqu'un petit robot attrape son objet :
+    1) Le petit robot indique à l'araignée qu'il a attrapé son objet
+    2) L'araignée lui dit de revenir vers elle
+    3) Les petits robots reçoivent l'information
+    4) Les petits robots "font le tri" des informations : seul le robot appelé par l'araignée est concerné
+    5) Si un autre robot a attrapé un objet :
+         Cet autre robot ne bouge plus
+         Cet autre robot est placé en liste d'attente
+    6) L'araignée active ses modules à ultrasons
+    7) Le petit robot se dirige vers l'araignée jusqu'à une distance donnée (FollowMe)
+    8) Le petit robot lâche son objet et ne bouge plus.
+    9) Les robots en liste d'attente répètent les étapes 1 à 8 jusqu'à ce que la liste d'attente soit vide.
+    10) L'araignée désactive ses modules à ultrasons.
+    
+
 
 
