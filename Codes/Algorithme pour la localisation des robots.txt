@@ -23,7 +23,3 @@ Lorsqu'un petit robot attrape son objet :
     8) Le petit robot lâche son objet et ne bouge plus.
     9) Les robots en liste d'attente répètent les étapes 1 à 8 jusqu'à ce que la liste d'attente soit vide.
     10) L'araignée désactive ses modules à ultrasons.
-    
-
-
-
