@@ -1,0 +1,12 @@
+Algorithme pour la localisation des robots
+L'araignée et les swarms sont équipés de modules à ultrason.
+Au début, les modules de l'araignée sont éteints.
+Les swarms font fonctionner leurs modules tout le temps.
+
+Les swarms émettent des ultrasons et reçoivent des ultrasons de la part d'autres swarms.
+Si le signal reçu par un des capteurs à droite est plus fort que celui de gauche :
+    Le robot émetteur est à droite du robot récepteur
+Si le signal reçu par un des capteurs à gauche est plus fort que celui de droite :
+    Le robot émetteur est à gauche du robot récepteur
+
+

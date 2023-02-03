@@ -1,10 +1,13 @@
 #include <Pixy2.h>
 #include <Servo.h>
 #include <NewPing.h>
+#include <SoftwareSerial.h>
 
 const int gripperServoPin = 3;
 const int leftWheelPin = 5;
 const int rightWheelPin = 6;
+const int HC12_RXD = 8;
+const int HC12_TXD = 9;
 const int trigger = 14;
 const int echo = 15;
 const int maxDistance = 350; //cm
@@ -19,6 +22,7 @@ Servo gripperServo;
 Servo rightWheel;
 Servo leftWheel;
 NewPing distanceSensor(trigger, echo, maxDistance);
+SoftwareSerial HC12(HC12_TXD, HC12_RXD);
 
 //Fonctions de déplacement du robot
 void fullSpeed()
@@ -110,11 +114,26 @@ void setup()
   leftWheel.attach(leftWheelPin);
   pixy.init();
   gripperServo.write(0);
+  HC12.begin(9600);
   //stop();
 }
 
 void loop() 
 {
+//  if(HC12.available()) {                         
+
+//Serial.write(HC12.read());             
+
+//} 
+
+//if(Serial.available()){                  
+
+  //HC12.write(12);   
+  while (HC12.available()) {        // If HC-12 has data
+    int val = HC12.read();
+    Serial.println(HC12.read());      // Send the data to Serial monitor
+  }
+//}
   /*grabTheObject();
   distance = distanceSensor.ping_cm();
   avoidObstacle(distance);
