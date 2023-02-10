@@ -12,7 +12,7 @@ const int HC12_TXD = 9;
 const int trigger = 14;
 const int echo = 15;
 const int maxDistance = 350; //cm
-const char robotName = 'S';
+const char robotName = 'K';
 bool called = false;
 bool signatureCalled = false;
 char possibleSignatures[8] = {'1', '2', '3', '4', '5', '6', '7'};
@@ -204,6 +204,7 @@ char receiveMessage()
 
           if(message == c)
           {
+            signatureCalled = true;
             return message;
           }        
         }
@@ -271,7 +272,7 @@ void loop()
 
 
   //Spider
-  while(!called)
+  /*while(!called)
   {
     callRobot('K');
     Serial.println("callingK");
@@ -283,28 +284,24 @@ void loop()
     sendObjectToGrab(1);    
   }
   //EndSpider
+  */
   //Bot
   while(!called)
   {
     receiveMessage();
     Serial.println("lol");
   }
-  if (called)
+  while(!signatureCalled)
   {
-    while(!signatureCalled)
-    {
-      callRobot('S'); //oui ?
-      receiveMessage();
-    }
-  }
-  signatureCalled = true;
-  if (signatureCalled)
-  { 
-    Serial.println("kekw"); 
-    char signature = receiveMessage();
-    Serial.println(signature);
+    callRobot('S'); //oui ?
+    Serial.println("CALLING S");    
+    receiveMessage();
+  } 
+  Serial.println("kekw"); 
+  char signature = receiveMessage();
+  Serial.println(signature);
+
     //pixyGetBlock(signature);
-  }
   /*if (called)
   {
     pixyGetBlock();    
