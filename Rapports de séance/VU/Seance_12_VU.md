@@ -14,13 +14,13 @@ Lorsque X et Y sont bien centrés et que D'= 125mm avec une marge, le robot s'ar
 
 En combinant ces deux morceaux, je peux me diriger vers mon objet et l'attraper à chaque fois de la même façon.
 
-Concernant le HC12, j'ai réussi à envoyer l'objet à attraper d'une Arduino à l'autre. J'ai simulé l'araignée donnant des ordres aux robots. Comme les essaims de robot imitent très souvent la nature, je me suis imaginé une conversation entre humains sans ambiguïté possible de cette forme : 
+Concernant le HC12, j'ai réussi à envoyer l'objet à attraper d'une Arduino à l'autre. J'ai simulé l'araignée donnant des ordres aux robots. Comme les essaims de robot imitent très souvent la nature, je me suis imaginé une conversation entre humains sans ambiguïté possible de cette forme: 
 1) A appelle B 
 2) B confirme le fait d'avoir entendu A (l"équivalent du "oui, je peux vous rendre service ?")
 3) A donne une tâche à B
 4) B effectue la tâche
 
-En appliquant ceci aux robots, chaque robot a un nom unique : K, U pour mes petits robots, S pour l'araignée. Voici ce que j'ai fait pour l'instant :
+En appliquant ceci aux robots, chaque robot a un nom unique : K, U pour mes petits robots, S pour l'araignée. Voici ce que j'ai fait pour l'instant:
 1) S appelle K par son nom
 2) K confirme avoir entendu S en rappelant S
 3) S envoie le numéro (sous la forme d'un char) de la signature* de l'objet
