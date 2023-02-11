@@ -4,11 +4,9 @@ J'ai commencé à écrire le code pour diriger et ramasser le robot vers son obj
 Pour expliquer le fonctionnement du code, tous mes objets ont la même forme et la même hauteur, 80 mm de hauteur (la même chose qu'un petit stick de colle de la marque UHU). 
 Je me place à une distance connue de ma Pixycam, ici je me suis placé à environ 125 mm, c'est-à-dire au niveau où ma pince peut attraper cet objet. Je branche mon Arduino et ma Pixy, puis grâce aux informations que les fonctions intégrées de Pixy et que le Serial Monitor me donnent, je peux obtenir la hauteur en pixel de l'objet, c'est-à-dire la hauteur que ma Pixycam voit.
 Mon but est de déterminer la distance focale de ma Pixycam afin de calculer n'importe quelle distance entre ma Pixy et un objet une fois que ce-dernier est détecté.
-Si je note H la hauteur de mon objet, D la distance mesurée entre ma Pixy et mon objet, P la hauteur en pixel de mon objet vue par la caméra à un instant t et F la distance focale que je dois calculer, j'ai la formule suivante : 
-$$ F = {(DP)\over H} $$
+Si je note H la hauteur de mon objet, D la distance mesurée entre ma Pixy et mon objet, P la hauteur en pixel de mon objet vue par la caméra à un instant t et F la distance focale que je dois calculer, j'ai la formule suivante : F = (DP)/H.
 F est alors une constante que je peux utiliser pour calculer une distance inconnue.
-Si je note D' une distance inconnue par rapport à la Pixy, j'ai : 
-$$ D' = {(FH) \over P} $$
+Si je note D' une distance inconnue par rapport à la Pixy, j'ai : D' = (FH)/P.
 
 Maintenant, pour ramasser correctement mon objet, je dois centrer ma caméra sur l'objet. Pour ce faire, la Pixy me donne déjà accès à la hauteur de la frame <i>frameHeight</i> et la largeur de la frame <i>frameWidth</i>. Il faut aussi savoir que la détection de la Pixy se fait par block, un block étant un rectangle qui entoure au mieux l'objet qu'on détecte. Je peux avoir la hauteur et la largeur du block et la position en X et en Y grâce aux fonctions intégrées de Pixy. X et Y donnent l'intersection des diagonales du rectangle, donc X = (longueur du rectangle)/2 et Y = (largeur du rectangle)/2.
 Lorsque je détecte un objet à une position quelconque, je dois centrer le block. Tant que X n'est pas égal à frameWidth/2 (plus ou moins une petite marge), je tourne à droite ou à gauche. Tant que Y n'est pas égal à frameHeight/2 (toujours avec une marge), j'avance ou je recule.
