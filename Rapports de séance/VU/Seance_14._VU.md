@@ -29,7 +29,7 @@ La tension aux bornes du condensateur n'est plus de 0. Résultat : le signal en 
 <p align="center">
     <i>Figure 3: Signal en sortie de l'émetteur que je suis censé avoir</i>
 </p>
-La différence peut s'expliquer par mes transistors qui sont différents de ceux du schéma électrique de l'émetteur (Séance 13).
+La différence entre les deux signaux peut s'expliquer par mes transistors qui sont différents de ceux du schéma électrique de l'émetteur (Séance 13).
 
 En continuant les tests, en plaçant l'émetteur en face du récepteur, j'obtiens le signal ci-dessous avant la diode de l'émetteur :
 <p align="center">
