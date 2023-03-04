@@ -15,13 +15,11 @@ J'ai enlevé le court-circuit, mais il n'y avait plus de signal. Après avoir re
 La tension aux bornes du condensateur n'est plus de 0. Résultat : le signal en sortie de l'émetteur est parfait.
 
 En continuant les tests, en plaçant l'émetteur en face du récepteur, j'obtiens le signal ci-dessous avant la diode de l'émetteur :
-<p align="center">
-    <figure>
+    <figure align="center">
         <img src = "./images/Seance14/signal_received_diode_me.jpg"/>
         <figcaption align="center"><i>Figure 2: Signal que mon récepteur reçoit</i>
         </figcaption>
     </figure>
-</p>
 
 Et voici le signal que je suis censé obtenir :
 <p align="center">
