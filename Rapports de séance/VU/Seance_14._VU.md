@@ -23,7 +23,7 @@ La tension aux bornes du condensateur n'est plus de 0. Résultat : le signal en 
 </p>
 
 <p align="center">
-    <img src="emitter_output_dog.jpg">
+    <img src="./images/Seance14/emitter_output_dog.jpg">
 </p>
 
 <p align="center">
