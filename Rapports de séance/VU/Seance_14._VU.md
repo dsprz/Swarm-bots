@@ -13,7 +13,7 @@ En continuant les tests, en plaçant l'émetteur en face du récepteur, j'obtien
 <img src = "./images/Seance14/signal_received_diode_me.jpg"/>
 
 Et voici le signal que je suis censé obtenir :
-<img src = "./images/Seance14/signal_recieved_diode_dog.jpg"/>
+<img src = "./images/Seance14/signal_received_diode_dog.jpg"/>
 
 J'obtiens un résultat très satisfaisant.
 Lorsque je lis le signal sur le fil Signal du schéma électrique, j'obtiens une tension qui varie en fonction de la distance entre l'émetteur et le récepteur.
