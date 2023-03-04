@@ -2,9 +2,11 @@ Séance 14
 
 J'ai commencé à monter un premier récepteur. Ci-dessous le schéma électrique du récepteur :
 <p align="center">
-    <figcaption align="center"><i>Figure 1: Schéma électrique du récepteur</i>
+    <figure>
         <img src ="./images/Seance14/receiver.jpg"/>
-    </figcaption>
+        <figcaption align="center"><i>Figure 1: Schéma électrique du récepteur</i>
+        </figcaption>
+    </figure>
 </p>
 En faisant les branchements pour faire un premier test  sur la breadboard, j'ai fait beaucoup d'erreurs de branchement parce que j'ai passé beaucoup de temps à souder l'émetteur et je commençais à confondre les connections de la breadboard et celles que j'allais réaliser avec de l'étain. J'ai corrigé les erreurs de branchement.
 
@@ -14,16 +16,20 @@ La tension aux bornes du condensateur n'est plus de 0. Résultat : le signal en 
 
 En continuant les tests, en plaçant l'émetteur en face du récepteur, j'obtiens le signal ci-dessous avant la diode de l'émetteur :
 <p align="center">
-    <figcaption align="center"><i>Figure 2: Signal que mon récepteur reçoit<i>
+    <figure>
         <img src = "./images/Seance14/signal_received_diode_me.jpg"/>
-    </figcaption>
+        <figcaption align="center"><i>Figure 2: Signal que mon récepteur reçoit<i>
+        </figcaption>
+    </figure>
 </p>
 
 Et voici le signal que je suis censé obtenir :
 <p align="center">
-    <figcaption align="center"><i>Figure 3: Signal que je suis censé obtenir</i>
+    <figure>
         <img src = "./images/Seance14/signal_received_diode_dog.jpg"/>
-    </figcaption>
+        <figcaption align="center"><i>Figure 3: Signal que je suis censé obtenir</i>
+        </figcaption>
+    </figure>
 </p>
 J'obtiens un résultat très satisfaisant.
 Lorsque je lis le signal sur le fil Signal du schéma électrique, j'obtiens une tension qui varie en fonction de la distance entre l'émetteur et le récepteur.
