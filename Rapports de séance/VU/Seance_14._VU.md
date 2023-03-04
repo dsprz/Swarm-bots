@@ -18,7 +18,7 @@ En continuant les tests, en plaçant l'émetteur en face du récepteur, j'obtien
 <p align="center">
     <figure>
         <img src = "./images/Seance14/signal_received_diode_me.jpg"/>
-        <figcaption align="center"><i>Figure 2: Signal que mon récepteur reçoit<i>
+        <figcaption align="center"><i>Figure 2: Signal que mon récepteur reçoit</i>
         </figcaption>
     </figure>
 </p>
