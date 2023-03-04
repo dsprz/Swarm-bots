@@ -1,4 +1,4 @@
-Séance 14
+<p align="center"><h1>Séance 14</h1><p>
 
 J'ai commencé à monter un premier récepteur. Ci-dessous le schéma électrique du récepteur :
 <p align="center">
@@ -10,16 +10,28 @@ J'ai commencé à monter un premier récepteur. Ci-dessous le schéma électriqu
 
 En faisant les branchements pour faire un premier test  sur la breadboard, j'ai fait beaucoup d'erreurs de branchement parce que j'ai passé beaucoup de temps à souder l'émetteur et je commençais à confondre les connections de la breadboard et celles que j'allais réaliser avec de l'étain. J'ai corrigé les erreurs de branchement.
 
-Après avoir corrigé tous les branchements, j'ai fait mes premiers tests avec le duo émetteur-récepteur. Grâce à Ronan, j'ai réalisé que la soudure de l'émetteur avait un court-circuit. J'avais un signal qui sortait et qui semblait être bon (parce que je pensais que du fait que j'utilise un transistor légèrement différent de celui qui est sur le schéma électrique, le signal allait être un peu différent), sauf que ce n'était pas le bon signal.
-J'ai enlevé le court-circuit, mais il n'y avait plus de signal. Après avoir regardé les tensions sur à peu près tous les composants, j'ai vu qu'étrangement la tension aux bornes du condensateur 22nF était de 0V. J'ai désouder ce-dernier et je l'ai remplacé par un nouveau.
-La tension aux bornes du condensateur n'est plus de 0. Résultat : le signal en sortie de l'émetteur est parfait.
+Après avoir corrigé tous les branchements, j'ai fait mes premiers tests avec le duo émetteur-récepteur. Grâce à Ronan, j'ai réalisé que la soudure de l'émetteur avait un court-circuit. J'avais un signal qui sortait et qui semblait être bon (parce que je pensais que du fait que j'utilise un transistor légèrement différent de celui qui est sur le schéma électrique, le signal allait être un peu différent), sauf que ce n'était pas du tout le bon signal.
+J'ai enlevé le court-circuit, mais il n'y avait plus de signal. Après avoir regardé les tensions sur à peu près tous les composants, j'ai vu qu'étrangement la tension aux bornes du condensateur 22nF était de 0V. J'ai désoudé ce-dernier et je l'ai remplacé par un nouveau.
+La tension aux bornes du condensateur n'est plus de 0. Résultat : le signal en sortie de l'émetteur est parfait, comme on peut le voir en comparant les signaux suivants :
+
+<p align="center">
+    <img src="./images/Seance14/emitter_output.jpg">
+</p>
+
+<p align="center">
+    <i>Figure 2: Signal en sortie de mon émetteur</i>
+</p>
+
+<p align="center">
+    <i>Figure 3: Signal en sortie de l'émetteur que je suis censé avoir</i>
+</p>
 
 En continuant les tests, en plaçant l'émetteur en face du récepteur, j'obtiens le signal ci-dessous avant la diode de l'émetteur :
 <p align="center">
     <img src = "./images/Seance14/signal_received_diode_me.jpg"/>
 </p>
 <p align="center">
-    <i>Figure 2: Signal que mon récepteur reçoit</i>
+    <i>Figure 4: Signal que mon récepteur reçoit</i>
 </p>
 
 
