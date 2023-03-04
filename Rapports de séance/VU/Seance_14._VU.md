@@ -15,11 +15,15 @@ J'ai enlevé le court-circuit, mais il n'y avait plus de signal. Après avoir re
 La tension aux bornes du condensateur n'est plus de 0. Résultat : le signal en sortie de l'émetteur est parfait, comme on peut le voir en comparant les signaux suivants :
 
 <p align="center">
-    <img src="./images/Seance14/emitter_output.jpg">
+    <img src="./images/Seance14/emitter_output.jpg" width="50%" height="50%">
 </p>
 
 <p align="center">
     <i>Figure 2: Signal en sortie de mon émetteur</i>
+</p>
+
+<p align="center">
+    <img src="emitter_output_dog.jpg">
 </p>
 
 <p align="center">
