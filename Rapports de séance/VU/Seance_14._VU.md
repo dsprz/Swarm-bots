@@ -2,7 +2,7 @@
 
 J'ai commencé à monter un premier récepteur. Ci-dessous le schéma électrique du récepteur :
 <p align="center">
-    <img src ="./images/Seance14/receiver.jpg" width="110%" height="110%"/>
+    <img src ="./images/Seance14/receiver.jpg" width="80%" height="80%"/>
 </p>
 <p align="center">
     <i>Figure 1: Schéma électrique du récepteur</i>
