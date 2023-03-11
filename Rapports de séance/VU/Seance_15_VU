@@ -1,0 +1,4 @@
+J'ai récupéré le projet d'un PEIP2 pour ses 6 récepteurs, ce qui accélère grandement mon avancée.
+J'ai remplacé le gros potentiomètre 1M par un plus petit, mais il y a eu un problème ce n'était pas la bonne valeur de résistance,
+(500 ohms au lieu de 1M). Quand j'ai eu le bon, je l'ai resoudé mais le récepteur renvoie un signal différent de celui espéré et je ne sais pas pourquoi.
+J'ai aussi dû remplacer les fils de soudure des sonotrodes par des fils Arduino que j'aidénudés et coupés. En effet les fils de soudure étaient beaucoup trop fragiles.
