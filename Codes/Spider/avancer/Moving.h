@@ -1,3 +1,5 @@
+#ifndef _MOVING_
+#define _MOVING_
 #include <Arduino.h>
 #define TAILLETOUTPIN 18
 #define TAILLE6PIN 6
@@ -15,12 +17,17 @@ class Moving {
     void tournerGauche2();
     void tournerDroite1();
     void tournerDroite2();
+
+    void checkGauche();
+    void checkDroite();
+    void checkMilieu();
+
+    void positionNormal();
     
   private :
     void bouger(int liste,float positio);   
-    void bougerListe(int liste[],float positio[], int taille);
+    void bougerListe(int liste[],float positio[], int taille,int temps);
     double angle(int pin, float positio); // permet de faire avancer en symetrique le robot
-    
     int laPosition; // utilise pour utiliser la fonction angle dans le cpp
 
     //Ces listes sont utiles pour déplacer l'araignée. Elles corespondent à tous les pin accroché au servomoteur.
@@ -38,4 +45,11 @@ class Moving {
 
     int normTeta = 20;
     int normBeta = 10;
+
+    int temps = 600; 
+
+    int d1;
+    int m1;
+    int g1;
 };
+#endif

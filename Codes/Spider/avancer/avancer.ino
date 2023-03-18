@@ -1,18 +1,32 @@
 #include "Moving.h"
-Moving moving = Moving();
+#include "Capteurs.h"
+Moving avancer = Moving();
+Capteurs capteurs = Capteurs();
 bool encore=true;
+int duree = 8000;
+unsigned long tempsAncien; 
+unsigned long tempsActuel;
 
 void setup() {
-  Serial.begin(9600);
-  moving.initialisation();
+  Serial.begin(9600);  
+  //avancer.initialisation();
+  tempsAncien=millis(); // on initialise le temps ancien à maintenant.
 }
 
 void loop() {
-  //moving.initialisation();
-  moving.avancer1();
-  moving.avancer2();
- /* 
-  while(Serial.available()) {
+  tempsActuel=millis();                                   
+  if ((tempsActuel-tempsAncien)<=duree){
+    capteurs.obstacle();
+    tempsAncien=tempsActuel;
+  }
+  avancer.avancer1();
+  avancer.avancer2();
+  
+}
+
+
+/*
+while(Serial.available()) {
       int lu = Serial.read();
       lu = lu-48;
       if (lu==0){
@@ -47,24 +61,4 @@ void loop() {
           moving.reculer2();
           encore=true;}
       }   
-  }
-  */
-  /*
-  for(int i=0; i<=4;i++){
-    moving.avancer1();
-    moving.avancer2();
-  }
-  for(int i=0; i<=4;i++){
-    moving.reculer1();
-    moving.reculer2();
-  }
-  for(int i=0; i<=4;i++){
-    moving.tournerGauche1();
-    moving.tournerGauche2();
-  }
-  for(int i=0; i<=4;i++){
-    moving.tournerDroite1();
-    moving.tournerDroite2();
   }*/
-  
-}
