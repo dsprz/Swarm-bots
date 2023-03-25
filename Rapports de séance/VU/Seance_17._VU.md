@@ -2,7 +2,7 @@ Le deuxième robot qu'il me restait commence à se casser sur sa face droite.
 J'ai alors décidé de construire une autre version du corps du robot avec des encoches en T comme sur la Figure 1 suivante:
 
 <p align="center">
-    <img src ="./images/Seance14/rainuresEnT.png" width="80%" height="80%"/>
+    <img src ="./images/Seance17/rainuresEnT.png" width="80%" height="80%"/>
 </p>
 <p align="center">
     <i>Figure 1: forme du nouveau corps du robot</i>
