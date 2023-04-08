@@ -14,7 +14,7 @@ Je voulais aussi voir pourquoi j'obtenais 0, j'ai utilisé l'oscilloscope pour v
     <i>Figure 1: Représentation de l'image dans la Pixy</i>
 </p>
 Pour plus de simplicité, je vais poser à frameWidth/2 = x/2 (+ marge) et frameHeight/2 = y/2 (+ marge).
-L'objet est un block rectangulaire, dans mes tests c'était un baton de colle. Je me refère à l'objet grâce à son centre. Le but est de centrer le rectangle au milieu de la frame. Je suppose que mon objet est suffisamement loin, i.e. que mon objet est à y_objet <
+L'objet est un block rectangulaire, dans mes tests c'était un baton de colle. Je me refère à l'objet grâce à son centre. Le but est de centrer le rectangle au milieu de la frame. Je suppose que mon objet est suffisamement loin, i.e. que mon objet est à y_objet < y/2.
 J'ai programmé les déplacemens comme suit:
 Tant que je ne suis pas à la distance de l'objet qui convient, je me déplace en y tant que y_objet n'est 
 pas à y/2 avec une marge. Puis une fois que j'atteins y/2, je centre en x: tant que x_objet est plus petit que x/2, je tourne à droite, tant que x_objet est supérieur à x/2, je tourne à gauche.
