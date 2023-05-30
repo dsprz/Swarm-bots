@@ -1,7 +1,15 @@
 #include "Moving.h"
 
 //Constructeur
-Moving::Moving(){}
+Moving::Moving(int vitesse){
+  setVitesse(vitesse);
+}
+int Moving::setVitesse(int vitesse){
+  this->vitesse=vitesse;
+}
+int Moving::getVitesse(){
+  return (this->vitesse);
+}
 
 /*
 Pour utiliser la carte SSC-32 qui fait bouger les servomoteurs, on doit faire :
@@ -13,10 +21,10 @@ Avec -pin : le servomoteur accroché à ce pin que l'on veut faire bouger
 
 //Fonction qui a une liste de pin et une position en entrée et qui pour chaque pin de la liste demander d'aller à une position
 void Moving::bouger(int liste,float positio){
-    Serial.print("#");
-    Serial.print(liste);
-    Serial.print(" P");
-    Serial.print(angle(liste,positio)); // on utilise angle pour que le déplacement soit symetrique
+  Serial.print("#");
+  Serial.print(liste);
+  Serial.print(" P");
+  Serial.print(angle(liste,positio)); // on utilise angle pour que le déplacement soit symetrique
   Serial.print(" T");
   Serial.println(500);
 }
@@ -37,18 +45,24 @@ void Moving::bougerListe(int liste[],float positio[], int taille, int temps){
 
 // Permet de faire tourner les servomoteurs de facon symetrique
 double Moving::angle(int pin ,float positio){
+  //renvoie la symetrique par rapport à 1500) pour les servotmoeurs de droite;
   if (pin==16 or pin==20 or pin==24){
-    return (3000-positio); //renvoie la symetrique par rapport à 1500);
+    return (3000-positio);
   }
-  else if (pin==2 or pin==6 or pin==10 or pin==18 or pin==22 or pin==26){
+  if (pin==2 or pin==6 or pin==10 or pin==18 or pin==22 or pin==26){
     return (positio + 400);
   }
+  //les servo moteurs ne sont pas exacement pareil
+  if(pin==25){return (positio+40);}
+  if(pin==14){return (positio-100);}
+  if(pin==21){return (positio+90);}
+  if(pin==17){return (positio-20);}
+
   return positio;
 }
 
-
 //Fonction qui permet d'initialiser les servomoteurs à une certaine position pour ensuite pouvoir la faire avancer ( et tester que tout les servomoteurs marchent bien)
-void Moving::initialisation(){
+void Moving::testServos(){
   for (int i=0; i<TAILLE6PIN;i++){
     bouger(pinDevant[i],2000);
     delay(500);
@@ -64,85 +78,18 @@ void Moving::initialisation(){
     delay(500);
   }
 }
-
-//fonction en test pour faire avancer l'araignée
-void Moving::avancer1(){
-  float positio2[18]={15.5,normBeta,normTeta,-2.5,normBeta+40,normTeta+12,-12,normBeta,normTeta,24.5,normBeta+40,normTeta+12,11,normBeta,normTeta,-15.5,normBeta+40,normTeta+12};  //position 6
-  bougerListe(toutPin,positio2,TAILLETOUTPIN,temps);
-  delay(300);
-  
-  float positio[18]={46,normBeta,normTeta,-25,normBeta,normTeta,18,normBeta,normTeta,-5,normBeta,normTeta,32,normBeta,normTeta,-46,normBeta,normTeta};   // position 0
-  bougerListe(toutPin,positio,TAILLETOUTPIN,temps);
-  delay(300);
-}
-void Moving::avancer2(){
-  float positio2[TAILLETOUTPIN]={15.5,normBeta+40,normTeta+12,-2.5,normBeta,normTeta,-12,normBeta+40,normTeta+12,24.5,normBeta,normTeta,11,normBeta+40,normTeta+12,-15.5,normBeta,normTeta};  //position 6
-  bougerListe(toutPin,positio2,TAILLETOUTPIN,temps);
-  delay(300);   
-  
-  float positio1[TAILLETOUTPIN]={-15,normBeta,normTeta,20,normBeta,normTeta,-42,normBeta,normTeta,54,normBeta,normTeta,-10,normBeta,normTeta,15,normBeta,normTeta};      //position 14
-  bougerListe(toutPin,positio1,TAILLETOUTPIN,temps);
-  delay(300);
-  
+void Moving::relever(){
+  for (int i=0; i<6 ; i++){
+    listePosition[i]=listeNormale[i];
+  }
+  for (int i=0;i<4;i++){
+    listePositionBetaTeta[i]=0;
+  }
+  deplacementAction();
+  bougerListe(toutPin,liste,TAILLETOUTPIN,temps);
 }
 
-void Moving::reculer1(){  
-  float positio2[TAILLETOUTPIN]={15.5,normBeta+40,normTeta+12,-2.5,normBeta,normTeta,-12,normBeta+40,normTeta+12,24.5,normBeta,normTeta,11,normBeta+40,normTeta+12,-15.5,normBeta,normTeta};  //position 6
-  bougerListe(toutPin,positio2,TAILLETOUTPIN,temps);
-  delay(300);
   
-  float positio1[TAILLETOUTPIN]={46,normBeta,normTeta,-25,normBeta,normTeta,18,normBeta,normTeta,-5,normBeta,normTeta,32,normBeta,normTeta,-46,normBeta,normTeta};   // position 0
-  bougerListe(toutPin,positio1,TAILLETOUTPIN,temps);
-  delay(300);
-  
-}
-void Moving::reculer2(){
-  float positio2[TAILLETOUTPIN]={15.5,normBeta,normTeta,-2.5,normBeta+40,normTeta+12,-12,normBeta,normTeta,24.5,normBeta+40,normTeta+12,11,normBeta,normTeta,-15.5,normBeta+40,normTeta+12};  //position 6
-  bougerListe(toutPin,positio2,TAILLETOUTPIN,temps);
-  delay(300);
- 
-  float positio1[TAILLETOUTPIN]={-15,normBeta,normTeta,20,normBeta,normTeta,-42,normBeta,normTeta,54,normBeta,normTeta,-10,normBeta,normTeta,15,normBeta,normTeta};      //position 14
-  bougerListe(toutPin,positio1,TAILLETOUTPIN,temps);
-  delay(300);
-}
-
-void Moving::tournerGauche1(){
-  float positio1[TAILLETOUTPIN]={15.5,normBeta,normTeta,-2.5,normBeta+40,normTeta+12,-12,normBeta,normTeta,24.5,normBeta+40,normTeta+12,11,normBeta,normTeta,-15.5,normBeta+40,normTeta+12};  //position 6
-  bougerListe(toutPin,positio1,TAILLETOUTPIN,temps);
-  delay(300);
-  
-  float positio2[TAILLETOUTPIN]={-15,normBeta,normTeta,20,normBeta,normTeta,-42,normBeta,normTeta,-5,normBeta,normTeta,32,normBeta,normTeta,-46,normBeta,normTeta};   // position 0
-  bougerListe(toutPin,positio2,TAILLETOUTPIN,temps);
-  delay(300);
-}
-void Moving::tournerGauche2(){
-  float positio1[TAILLETOUTPIN]={15.5,normBeta+40,normTeta+12,-2.5,normBeta,normTeta,-12,normBeta+40,normTeta+12,24.5,normBeta,normTeta,11,normBeta+40,normTeta+12,-15.5,normBeta,normTeta};  //position 6
-  bougerListe(toutPin,positio1,TAILLETOUTPIN,temps);
-  delay(300);
-  
-  float positio2[TAILLETOUTPIN]={46,normBeta,normTeta,-25,normBeta,normTeta,18,normBeta,normTeta,54,normBeta,normTeta,-10,normBeta,normTeta,15,normBeta,normTeta};      //position 14
-  bougerListe(toutPin,positio2,TAILLETOUTPIN,temps);
-  delay(300);
-}
-
-void Moving::tournerDroite1(){
-  float positio1[TAILLETOUTPIN]={15.5,normBeta,normTeta,-2.5,normBeta+40,normTeta+12,-12,normBeta,normTeta,24.5,normBeta+40,normTeta+12,11,normBeta,normTeta,-15.5,normBeta+40,normTeta+12};  //position 6
-  bougerListe(toutPin,positio1,TAILLETOUTPIN,temps);
-  delay(300);
-  
-  float positio2[TAILLETOUTPIN]={46,normBeta,normTeta,-25,normBeta,normTeta,18,normBeta,normTeta,54,normBeta,normTeta,-10,normBeta,normTeta,15,normBeta,normTeta};   // position 0
-  bougerListe(toutPin,positio2,TAILLETOUTPIN,temps);
-  delay(300);
-}
-void Moving::tournerDroite2(){
-  float positio1[TAILLETOUTPIN]={15.5,normBeta+40,normTeta+12,-2.5,normBeta,normTeta,-12,normBeta+40,normTeta+12,24.5,normBeta,normTeta,11,normBeta+40,normTeta+12,-15.5,normBeta,normTeta};  //position 6
-  bougerListe(toutPin,positio1,TAILLETOUTPIN,temps);
-  delay(300);
-  
-  float positio2[TAILLETOUTPIN]={-15,normBeta,normTeta,20,normBeta,normTeta,-42,normBeta,normTeta,-5,normBeta,normTeta,32,normBeta,normTeta,-46,normBeta,normTeta};      //position 14
-  bougerListe(toutPin,positio2,TAILLETOUTPIN,temps);
-  delay(300);
-}
 
 void Moving::checkGauche(){
   float positio[TAILLE6PIN]={40,40,40,-40,-40,-40};
@@ -156,92 +103,174 @@ void Moving::checkDroite(){
 
 void Moving::checkMilieu(){
   positionNormal();
-  
 }
 
 void Moving::positionNormal(){
-  float positio[TAILLETOUTPIN]={0,normBeta,normTeta,0,normBeta,normTeta,0,normBeta,normTeta,0,normBeta,normTeta,0,normBeta,normTeta,0,normBeta,normTeta};
-  bougerListe(toutPin,positio,TAILLETOUTPIN,temps);
+  //Si toute les pattes touchent le sol, on les leves pour le déplacement
+  if (listePosition[0]==normBeta && listePosition[2]==normBeta && !comparerListe()){
+    leverPatte();
+  }
+  for (int i=0; i<6 ; i++){
+    listePosition[i]=listeNormale[i];
+  }
+  for (int i=0;i<4;i++){
+    listePositionBetaTeta[i]=listeNormaleBetaTeta[i];
+  }
+  deplacementAction();
+  bougerListe(toutPin,liste,TAILLETOUTPIN,temps);
 }
 
-/*
-//test pour de nouvelles fonction pour bouger
 
-m1 = normBeta à normBeta+40 = 40 // division par 10
-
-b1 = normTeta à normTeta+12 = 12 // division par 3
-
-f1 = 46 à -15 = 61 // pareil que f4 donc 60 division par -15
-
-f2 = -25 à 20 = 45 // pareil que f5 donc 44 division par 11
-
-f3 = 18 à -42 = 60 // pare  il que f6 donc 60 division par -15
-
-f4 = -5 à 54 = 59 // par +15
-
-f5 = 32 à -10 = 42 // par -11
-
-f6 = -46 à 15 = 61 // par +15
-
-float listeAddition1[18]={-15,0,0,11,beta,teta,-15,0,0,15,beta,teta,-11,0,0,15,beta,teta};
-float listeAddition2[18]={-15,beta,teta,11,0,0,-15,beta,teta,15,0,0,-11,beta,teta,15,0,0};
-void Moving::avancer(){
-  //si la 1er patte est au sol : 
-  if (listePosition[2]==normBeta){
-    for (int i=0; i<18; i++){
-      listePosition[i]+=listeAddition1[i];
+void Moving::avancer(bool var){
+  if (var){
+    for (int i=0; i<6; i++){
+      listePosition[i]+=listeAddition1[i]*vitesse;
     }
+  }
+  else{
+    for (int i=0; i<6; i++){
+      listePosition[i]-=listeAddition1[i]*vitesse;
+    }
+  }
+}
+void Moving::reculer(bool var){
+ if (var){
+    for (int i=0; i<6; i++){
+      listePosition[i]-=listeAddition1[i]*vitesse;
+    }
+  }
+  else{
+    for (int i=0; i<6; i++){
+      listePosition[i]+=listeAddition1[i]*vitesse;
+    }
+  }
+}
+void Moving::tournerGauche(bool var){
+  if (var){
+    for (int i=0; i<6; i++){
+      listePosition[i]+=listeAddition2[i]*vitesse;
+    }
+  }
+  else{
+    for (int i=0; i<6; i++){
+      listePosition[i]-=listeAddition2[i]*vitesse;
+    }
+  }
+}
+void Moving::tournerDroite(bool var){
+  if (var){
+    for (int i=0; i<6; i++){
+      listePosition[i]+=listeAddition3[i]*vitesse;
+    }
+  }
+  else{
+    for (int i=0; i<6; i++){
+      listePosition[i]-=listeAddition3[i]*vitesse;
+    }
+  }
+}
+//permet de savoir si le déplacement est de reculer(0), d'avancer (1), de tourner à gauche(2) oubien de tourner à droite(3)
+void Moving::choixDeplacement(int typeDeplacement,bool var){
+  if (var){
+    listePositionBetaTeta[0]+=beta;
+    listePositionBetaTeta[1]+=teta;
+  }
+  else{
+    listePositionBetaTeta[2]+=beta;
+    listePositionBetaTeta[3]+=teta;
+  }
+  switch (typeDeplacement){
+    case 0 :
+      avancer(var);
+      break;
+    case 1 :
+      reculer(var);
+      break;
+    case 2 :
+      tournerGauche(var);
+      break;
+    case 3 :
+      tournerDroite(var);
+      break;
+  }
+}
+void Moving::deplacement(int typeDeplacement){
+  //on verrifie si avant le robot était dans la position normal
+  if(comparerListe()){
+    leverPatte();
+    avantNormal=true;
+  }
+  //si la 1er patte est au sol : 
+  // Oui permet que ca marche exemple : les deux sont aux sol, pour savoir lequel doit avancer
+  else if (listePositionBetaTeta[0]<=normBeta && oui){
+    choixDeplacement(typeDeplacement,0);
   }
   //si la 2ieme patte est au sol
-  else if (listePosition[5]==normBeta){
-    listePosition[i]+=listeAddition2[i];
+  else if (listePositionBetaTeta[2]<=normBeta && !oui){
+    choixDeplacement(typeDeplacement,1);
   }
   //Si la patte est monté au maximum, change la liste pour que la patte descende après
-  if (listePosition[2]==normBeta+40||listePosition[5]==normBeta+40){
-    beta=-10;
-    teta=-3;
-  }
-  //Si toute les pattes touche le sol, alors les angles beta et teta devront être positif pour avancer
-  if (listePosition[2]==normBeta)&&(listePosition[5]==normBeta){
-    listePosition=listeNormale; // on remet la liste en normal au cas ou
-    beta=10;
-    teta=3;
-  } 
-  //change la position de l'araignée
-  bougerListe(toutPin,listePosition,TAILLETOUTPIN,temps); 
-  delay(100); 
-}
-
-void Moving::reculer(){
-  //comme on recule, cest la même chose que avancer mais quand la patte monte, on doit dessendre et les positions sont invercées.
-  if (listePosition[2]==normBeta){
-    for (int i=0; i<18; i++){
-      listePosition[i]+=-listeAddition1[i];
+  if (!avantNormal){
+    if (listePositionBetaTeta[0]>=normBeta+40||listePositionBetaTeta[2]>=normBeta+40){ 
+      beta=-20*vitesse;
+      teta=-6*vitesse;  
     }
   }
-  else(listePosition[5]==normBeta){
-    listePosition[i]+=-listeAddition2[i];
+  else{
+    avantNormal=false;
   }
-  //Si la patte est monté au maximum, change la liste pour que la patte descende après
-  if (listePosition[2]==normBeta+40||listePosition[5]==normBeta+40){
-    beta=10;
-    teta=3;
-  }
-  //Si toute les pattes touche le sol, alors les angles beta et teta devront augmenter pour avancer
-  if (listePosition[2]==normBeta)&&(listePosition[5]==normBeta){
-    beta=-10;
-    teta=-3;
-    listePosition=listeNormale;
+  //Si toute les pattes touche le sol, alors les angles beta et teta devront être positif pour avancer
+  if ((listePositionBetaTeta[0]<=normBeta)&&(listePositionBetaTeta[2]<=normBeta)){
+    beta=20*vitesse;
+    teta=6*vitesse;
+    oui=!oui;
   } 
-  bougerListe(toutPin,listePosition,TAILLETOUTPIN,temps);
-}
-void Moving::positionNormal(){
-
-}
-void Moving::tournerGauche(){
-
+  //change la position de l'araignée
+  deplacementAction();
+  bougerListe(toutPin,liste,TAILLETOUTPIN,tmp);
 }
 
-// ATTENTION PAS OUBLIER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// quand on tourner apres on dessend ! ! ! ! ! ! ! ! pas oublier ca 
-*/  
+void Moving::leverPatte(){
+  listePositionBetaTeta[2]=normBeta+40;
+  listePositionBetaTeta[3]=normTeta+12;
+}
+
+bool Moving::comparerListe(){
+  for (int i=0;i<6;i++){
+    if (listePosition[i]!=listeNormale[i]){
+      return false;
+    }
+  }
+  if(listePositionBetaTeta[0]!=listeNormaleBetaTeta[0]||listePositionBetaTeta[2]!=listeNormaleBetaTeta[2]){
+    return false;
+  }  
+  return true;
+}
+
+void Moving::deplacementAction(){
+  k=0;
+  for (int i=0;i<18;i++){
+    if(i%3==0){
+      liste[i]=listePosition[k];
+      k+=1;
+    }
+    else if (i%3==1 && i%2==0){
+        liste[i]=listePositionBetaTeta[2];
+    }
+    else if (i%3==1 && i%2==1){
+      liste[i]=listePositionBetaTeta[0];
+    }
+    else if (i%3==2 && i%2==0){
+      liste[i]=listePositionBetaTeta[1];
+    }
+    else{
+      liste[i]=listePositionBetaTeta[3];
+    }
+  }
+}
+ 
+void Moving::positionCommEssaim(){
+  positionNormal();
+  delay(100);
+  bougerListe(toutPin,listePositionEssaim,TAILLETOUTPIN,temps);
+}

@@ -8,7 +8,7 @@ TFLI2C tflI2C;
 NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
 int16_t  tfDist;    // distance in centimeters
 int16_t  tfAddr = TFL_DEF_ADR;  // Use this default I2C address
-Moving moving = Moving();
+Moving moving = Moving(1);
 Capteurs::Capteurs(){
 }
 
@@ -30,20 +30,22 @@ int Capteurs::capteurIR(){
 
 void Capteurs::mouvementVerrifObstacle(){
   moving.positionNormal();
+  delay(200);
   moving.checkGauche();
+  delay(1000);
   distanceObstacle(0);
-  delay(1000);
   moving.checkDroite();
+  delay(1000);
   distanceObstacle(1);
-  delay(1000);
   moving.checkMilieu();
-  distanceObstacle(2);
   delay(1000);
+  distanceObstacle(2);
   mouvementSiObstacle();
   delay(500);
 }
 void Capteurs::distanceObstacle(int indice){
-  if (capteurUltrason()<distanceMin || capteurIR()<distanceMin){
+  // le capteur revoit 0 s'il capte pas (distance trop importante), il faut donc verrifier
+  if ((capteurUltrason()<distanceMin && capteurUltrason()>0)){
     tableau[indice]=true;
   }
   else{
@@ -54,29 +56,28 @@ void Capteurs::distanceObstacle(int indice){
 void Capteurs::mouvementSiObstacle(){
   //Obstacle gauche droite et milieu oubien gauche et droite : tourne de 135 ° à droite
   if (tableau[0] && tableau[2]){
-    moving.tournerDroite1();
-    moving.tournerDroite2();
-    moving.tournerDroite1();
-    moving.tournerDroite2();
-  }
-  
-  //Obstacle milieu : tourne de 90 ° à droite
+    combienDeplacer(3,31);
+  } 
+  //Obstacle gauche : tourne de 90 ° à droite
   else if (tableau[1] && tableau[2]){
-    moving.tournerGauche1();
-    moving.tournerGauche2();
+    combienDeplacer(2,21);
   }
   //Obstacle gauche et milieu oubien que milieu : tourne de 90 ° à droite
   else if (tableau[1]){
-    moving.tournerDroite1();
-    moving.tournerDroite2();
+    combienDeplacer(3,21);
   }
   //Obstacle gauche : tourne de 45 ° à droite
   else if (tableau[0]){
-    moving.tournerDroite1();
+    combienDeplacer(3,10);
   }
   //Obstacle droite : tourne de 45 ° à gauche
   else if (tableau[2]){
-    moving.tournerGauche1();
+    combienDeplacer(2,10);
   }
   
+}
+void Capteurs::combienDeplacer(int numeroDeplacement,int n){
+  for (int i=0;i<n;i++){
+    moving.deplacement(numeroDeplacement);
+  }
 }

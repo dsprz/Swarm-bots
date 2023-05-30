@@ -1,30 +1,85 @@
 #include "Moving.h"
 #include "Capteurs.h"
-Moving avancer = Moving();
+#include "Communication.h"
+#include "SoftwareSerial.h"
+int vitesse=1;
+const char robotName = 'S';
+Moving avancer = Moving(vitesse);
 Capteurs capteurs = Capteurs();
+Communication spiderRadio = Communication(robotName);
+
 bool encore=true;
-int duree = 8000;
+int duree = 6000;
 unsigned long tempsAncien; 
 unsigned long tempsActuel;
 
+
 void setup() {
-  Serial.begin(9600);  
-  //avancer.initialisation();
+  Serial.begin(9600);
+  spiderRadio.begin(9600);  
+  avancer.positionNormal();
+  delay(2000);
+  /*spiderRadio.callMiniBot('K');
+  spiderRadio.sendObjectToGrab(1);  */
   tempsAncien=millis(); // on initialise le temps ancien à maintenant.
 }
 
 void loop() {
-  tempsActuel=millis();                                   
-  if ((tempsActuel-tempsAncien)<=duree){
-    capteurs.obstacle();
-    tempsAncien=tempsActuel;
+  //while(encore){
+    tempsActuel=millis();
+    if ((tempsActuel-tempsAncien)>=duree){
+      capteurs.mouvementVerrifObstacle();
+      tempsAncien=millis();
+      encore=false;
+    }
+    avancer.deplacement(1);
+    /*if(!encore){
+      for (int i=0;i<20;i++){
+        avancer.deplacement(1);
+      }
+    }
   }
-  avancer.avancer1();
-  avancer.avancer2();
   
+  encore=true;
+  while(encore){
+    tempsActuel=millis();
+    if ((tempsActuel-tempsAncien)>=duree){
+      capteurs.mouvementVerrifObstacle();
+      tempsAncien=millis();
+      encore=false;
+    }
+    avancer.deplacement(1);
+    if(!encore){
+      for (int i=0;i<20;i++){
+        avancer.deplacement(1);
+      }
+    }
+  }
+  
+  spiderRadio.resetAllBooleans();
+  Serial.println(spiderRadio.getAbort());
+  while(!spiderRadio.getAbort()){
+    Serial.println("coucou");
+    spiderRadio.callMiniBot('K');
+    spiderRadio.sendObjectToGrab(1);
+    spiderRadio.waitForHomePosition();
+    avancer.positionCommEssaim();
+  }*/
 }
 
 
+
+  //avancer.deplacement(0);
+  /*Serial.println(tempsActuel-tempsAncien);                                  
+  if ((tempsActuel-tempsAncien)>=duree){
+    capteurs.mouvementVerrifObstacle();
+    tempsAncien=millis();
+  }*/
+ /* 0 : reculer 
+    1 : avancer
+    2 : gauche
+    3 : droite
+   */ 
 /*
 while(Serial.available()) {
       int lu = Serial.read();

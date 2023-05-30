@@ -16,5 +16,5 @@ class Capteurs{
   private :
     void distanceObstacle(int indice);
     bool tableau[3];
-    
+    void combienDeplacer(int numeroDeplacement,int n);    
 };
